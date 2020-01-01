@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FirebaseService} from '../../services/firebaseService/firebase.service';
+import {FirestoreService} from '../services/moduleFirebaseService/firestore.service';
 import * as firebase from 'firebase';
 
 @Component({
@@ -12,7 +12,7 @@ export class TimelinePage implements OnInit {
     uid: string;
     posts: any[];
 
-    constructor(private firebaseService: FirebaseService) {
+    constructor(private firebaseService: FirestoreService) {
     }
 
     ngOnInit() {
