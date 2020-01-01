@@ -1,6 +1,6 @@
-
 <ion-content>
-    <ion-card *ngFor="let post of posts" margin-bottom>
+    <ion-searchbar [(ngModel)]="search" animated></ion-searchbar>
+    <ion-card *ngFor="let post of posts | postfilter: search" margin-bottom>
         <ion-card-header class="username">{{post.post.ownerUsername}}</ion-card-header>
         <ion-card-content>
             {{post.post.body}}

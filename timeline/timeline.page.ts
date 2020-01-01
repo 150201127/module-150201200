@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FirestoreService} from '../services/moduleFirebaseService/firestore.service';
 import * as firebase from 'firebase';
+import {PostfilterPipe} from '../pipe/postfilter.pipe';
 
 @Component({
     selector: 'app-timeline',
@@ -11,6 +12,7 @@ export class TimelinePage implements OnInit {
 
     uid: string;
     posts: any[];
+    search: PostfilterPipe;
 
     constructor(private firebaseService: FirestoreService) {
     }

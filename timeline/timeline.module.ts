@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TimelinePage } from './timeline.page';
+import {PostfilterPipe} from '../pipe/postfilter.pipe';
+
 
 const routes: Routes = [
   {
@@ -21,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TimelinePage]
+  declarations: [TimelinePage, PostfilterPipe]
 })
 export class TimelinePageModule {}
