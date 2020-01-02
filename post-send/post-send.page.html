@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-card padding>
+    <ion-label position="stacked">Gönderinizin içeriği</ion-label>
+    <ion-textarea type="text" [(ngModel)]="body"></ion-textarea>
+  </ion-card>
+
+  <ion-card padding>
+    <ion-label margin-bottom="5px">Misafir gideceğiniz şehir</ion-label>
+    <ion-select okText="Tamam" cancelText="İptal" [(ngModel)]="currentCity">
+      <ion-select-option *ngFor="let city of cities" [value]='city'>{{city.name}}</ion-select-option>
+    </ion-select>
+  </ion-card>
+
+  <ion-button expand="block" color="success" (click)="saveClick()">Kaydet</ion-button>
+
+</ion-content>

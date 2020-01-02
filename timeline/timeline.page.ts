@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FirestoreService} from '../services/moduleFirebaseService/firestore.service';
 import * as firebase from 'firebase';
 import {PostfilterPipe} from '../pipe/postfilter.pipe';
+import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-timeline',
@@ -14,7 +15,7 @@ export class TimelinePage implements OnInit {
     posts: any[];
     search: PostfilterPipe;
 
-    constructor(private firebaseService: FirestoreService) {
+    constructor(private firebaseService: FirestoreService, private navCtrl: NavController) {
     }
 
     ngOnInit() {
@@ -26,18 +27,9 @@ export class TimelinePage implements OnInit {
     }
 
     uploadPost() {
-        const post = {
-            body: 'denemedenemedenemedeneme',
-            city: {
-                name: 'AMASYA',
-                plate: 5
-            },
-            ownerID: this.uid,
-            ownerUsername: '@emilmammadov',
-            invitations: [],
-        };
-
-        this.firebaseService.uploadPost(this.uid, post);
+        this.navCtrl.navigateRoot('posts/post-send').catch((err) => {
+            console.log(err);
+        });
     }
 
     getPosts(uid: string) {
