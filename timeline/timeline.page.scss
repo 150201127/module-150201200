@@ -5,3 +5,12 @@ h6 {
 .username {
   font-style: italic;
 }
+
+ion-header {
+  background-color: #007c6e;
+
+  ion-toolbar {
+    color: white;
+    --background: #007c6e;
+  }
+}

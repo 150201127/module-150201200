@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content text-center>
   <ion-card padding>
     <ion-label position="stacked">Gönderinizin içeriği</ion-label>
     <ion-textarea type="text" [(ngModel)]="body"></ion-textarea>
@@ -11,6 +11,6 @@
     </ion-select>
   </ion-card>
 
-  <ion-button expand="block" color="success" (click)="saveClick()">Kaydet</ion-button>
+  <ion-button expand="block" color="primary" (click)="saveClick()" margin>Paylaş</ion-button>
 
 </ion-content>
