@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FirestoreService} from '../services/moduleFirebaseService/firestore.service';
 import * as firebase from 'firebase';
+import {AlertController, NavController, ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-post-send',
@@ -341,7 +342,10 @@ export class PostSendPage implements OnInit {
         },
     ];
 
-    constructor(private firebaseService: FirestoreService) {
+    constructor(private firebaseService: FirestoreService,
+                private toastController: ToastController,
+                private navCtrl: NavController,
+                private alertController: AlertController) {
     }
 
     ngOnInit() {
@@ -349,6 +353,23 @@ export class PostSendPage implements OnInit {
             this.uid = user.uid;
             this.username = user.displayName;
         });
+    }
+
+    async presentToast(msg: string) {
+        const toast = await this.toastController.create({
+            message: msg,
+            duration: 2000
+        });
+        toast.present();
+    }
+
+    async presentAlert() {
+        const alert = await this.alertController.create({
+            header: 'Hata',
+            message: 'Gönderiniz yayınlanırken bir hata oluştu',
+            buttons: ['Tamam']
+        });
+        await alert.present();
     }
 
     saveClick() {
@@ -360,7 +381,12 @@ export class PostSendPage implements OnInit {
             invitations: [],
         };
 
-        this.firebaseService.uploadPost(this.uid, post);
+        this.firebaseService.uploadPost(this.uid, post).then(data => {
+            this.presentToast('Gönderiniz yayınlanmaya hazır');
+            this.navCtrl.navigateRoot('posts/timeline');
+        }).catch(err => {
+            this.presentAlert();
+        });
     }
 
 }

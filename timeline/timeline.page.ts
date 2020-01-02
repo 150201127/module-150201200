@@ -39,4 +39,10 @@ export class TimelinePage implements OnInit {
         });
     }
 
+    gotoProfile() {
+        this.navCtrl.navigateRoot('profile').catch((err) => {
+            console.log(err);
+        });
+    }
+
 }
