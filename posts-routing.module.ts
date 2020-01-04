@@ -12,10 +12,6 @@ const routes: Routes = [
         loadChildren: './timeline/timeline.module#TimelinePageModule'
     },
     {
-        path: 'invitations',
-        loadChildren: './invitations/invitations.module#InvitationsPageModule'
-    },
-    {
         path: 'post-send',
         loadChildren: './post-send/post-send.module#PostSendPageModule'
     },
