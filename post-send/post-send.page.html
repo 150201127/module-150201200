@@ -1,16 +1,19 @@
 <ion-content text-center>
-  <ion-card padding>
-    <ion-label position="stacked">Gönderinizin içeriği</ion-label>
-    <ion-textarea type="text" [(ngModel)]="body"></ion-textarea>
-  </ion-card>
+    <ion-infinite-scroll scrollX="true">
+        <ion-card padding>
+            <ion-label position="stacked">Gönderinizin içeriği</ion-label>
+            <ion-textarea type="text" [(ngModel)]="body"></ion-textarea>
+        </ion-card>
 
-  <ion-card padding>
-    <ion-label margin-bottom="5px">Misafir gideceğiniz şehir</ion-label>
-    <ion-select okText="Tamam" cancelText="İptal" [(ngModel)]="currentCity">
-      <ion-select-option *ngFor="let city of cities" [value]='city'>{{city.name}}</ion-select-option>
-    </ion-select>
-  </ion-card>
+        <ion-card padding>
+            <ion-label margin-bottom="5px">Misafir gideceğiniz şehir</ion-label>
+            <ion-select okText="Tamam" cancelText="İptal" [(ngModel)]="currentCity">
+                <ion-select-option *ngFor="let city of cities" [value]='city'>{{city.name}}</ion-select-option>
+            </ion-select>
+        </ion-card>
 
-  <ion-button expand="block" color="primary" (click)="saveClick()" margin>Paylaş</ion-button>
-
+        <ion-button expand="block" color="primary" (click)="saveClick()" margin>Paylaş</ion-button>
+        <ion-text wrap>{{locationString}}</ion-text>
+    </ion-infinite-scroll>
 </ion-content>
+

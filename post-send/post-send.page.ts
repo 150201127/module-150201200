@@ -3,6 +3,7 @@ import {FirestoreService} from '../services/moduleFirebaseService/firestore.serv
 import * as firebase from 'firebase';
 import {AlertController, NavController, ToastController} from '@ionic/angular';
 import {SQLService} from '../services/sqlService/sql.service';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 @Component({
     selector: 'app-post-send',
@@ -15,6 +16,7 @@ export class PostSendPage implements OnInit {
     uid: string;
     username: string;
     body: string;
+    locationString: string;
 
     cities: any[] = [
         {
@@ -347,13 +349,20 @@ export class PostSendPage implements OnInit {
                 private toastController: ToastController,
                 private navCtrl: NavController,
                 private alertController: AlertController,
-                private sqlService: SQLService) {
+                private sqlService: SQLService,
+                private geolocation: Geolocation) {
     }
 
     ngOnInit() {
         firebase.auth().onAuthStateChanged(user => {
             this.uid = user.uid;
             this.username = user.displayName;
+        });
+
+        this.geolocation.getCurrentPosition().then(resp => {
+            this.locationString = 'Şehir eklerken lokasyonuna dikkat et. Uygulamamız ücretsiz olduğu için' +
+                ' lokasyonundan bulunduğun şehri bulamıyoruz.' +
+                '\nŞuanki lokaysonun: ' + resp.coords.latitude + ', ' + resp.coords.longitude;
         });
     }
 
