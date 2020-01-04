@@ -3,6 +3,7 @@ import {FirestoreService} from '../services/moduleFirebaseService/firestore.serv
 import * as firebase from 'firebase';
 import {PostfilterPipe} from '../pipe/postfilter.pipe';
 import {NavController} from '@ionic/angular';
+import {SQLService} from '../services/sqlService/sql.service';
 
 @Component({
     selector: 'app-timeline',
@@ -15,7 +16,9 @@ export class TimelinePage implements OnInit {
     posts: any[];
     search: PostfilterPipe;
 
-    constructor(private firebaseService: FirestoreService, private navCtrl: NavController) {
+    constructor(private firebaseService: FirestoreService,
+                private navCtrl: NavController,
+                sqlService: SQLService) {
     }
 
     ngOnInit() {
@@ -30,6 +33,7 @@ export class TimelinePage implements OnInit {
         this.navCtrl.navigateRoot('posts/post-send').catch((err) => {
             console.log(err);
         });
+
     }
 
     getPosts(uid: string) {

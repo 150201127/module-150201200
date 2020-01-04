@@ -1,9 +1,21 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>my-posts</ion-title>
-  </ion-toolbar>
+    <ion-toolbar class="toolbar-container" padding-left>
+        <ion-title>Paylaşımlarım</ion-title>
+        <ion-button (click)="gotoProfile()" slot="end" color="warning">Profilim</ion-button>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding-top>
+
+    <ion-card *ngFor="let post of posts" margin-bottom>
+        <ion-badge slot="start" color="warning">{{"Davetler: " + post.invLen}}</ion-badge>
+
+        <ion-card-content>
+            {{post.body}}
+        </ion-card-content>
+        <ion-item-divider></ion-item-divider>
+        <h6 text-center>{{'#' + post.cityName}}</h6>
+        <ion-button expand="block" slot="end">Davet Yolla</ion-button>
+    </ion-card>
 
 </ion-content>

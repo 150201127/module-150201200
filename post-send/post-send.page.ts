@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FirestoreService} from '../services/moduleFirebaseService/firestore.service';
 import * as firebase from 'firebase';
 import {AlertController, NavController, ToastController} from '@ionic/angular';
+import {SQLService} from '../services/sqlService/sql.service';
 
 @Component({
     selector: 'app-post-send',
@@ -345,7 +346,8 @@ export class PostSendPage implements OnInit {
     constructor(private firebaseService: FirestoreService,
                 private toastController: ToastController,
                 private navCtrl: NavController,
-                private alertController: AlertController) {
+                private alertController: AlertController,
+                private sqlService: SQLService) {
     }
 
     ngOnInit() {
@@ -353,6 +355,10 @@ export class PostSendPage implements OnInit {
             this.uid = user.uid;
             this.username = user.displayName;
         });
+    }
+
+    uploadPost() {
+        this.sqlService.db.executeSql('INSERT INTO table_name VALUES (' + this.body + ', ' + this.currentCity.name + ', 0)');
     }
 
     async presentToast(msg: string) {
@@ -383,9 +389,11 @@ export class PostSendPage implements OnInit {
 
         this.firebaseService.uploadPost(this.uid, post).then(data => {
             this.presentToast('Gönderiniz yayınlanmaya hazır');
+            this.uploadPost();
             this.navCtrl.navigateRoot('posts/timeline');
         }).catch(err => {
             this.presentAlert();
+            console.log(err);
         });
     }
 
