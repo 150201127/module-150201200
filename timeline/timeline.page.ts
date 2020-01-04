@@ -26,7 +26,7 @@ export class TimelinePage implements OnInit {
         });
     }
 
-    uploadPost() {
+    uploadPostClick() {
         this.navCtrl.navigateRoot('posts/post-send').catch((err) => {
             console.log(err);
         });

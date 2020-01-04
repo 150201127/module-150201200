@@ -19,6 +19,11 @@ const routes: Routes = [
         path: 'post-send',
         loadChildren: './post-send/post-send.module#PostSendPageModule'
     },
+    {
+        path: 'my-posts',
+        loadChildren: './my-posts/my-posts.module#MyPostsPageModule'
+    },
+
 
 ];
 

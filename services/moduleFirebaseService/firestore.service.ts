@@ -11,7 +11,6 @@ export class FirestoreService {
     }
 
     getPosts(uid: string, callback) {
-
         this.firebaseService.getCities(uid, (cities) => {
             const plateArray = cities.map(elem => {
                 return elem.plate;
@@ -29,27 +28,9 @@ export class FirestoreService {
                 }));
             });
         });
-
-
     }
 
-    /*
-     Post {
-            body: deneme,
-            city: { plate: 5, name: Ankara},
-            ownerid: 156876523,
-            invitations: [
-                {
-                    uid: 568523,
-                    body: deneme,
-                    isAccepted: false
-                }
-            ]
-          }
-     */
-
     uploadPost(uid: string, post): Promise<any> {
-
         return new Promise((resolve, reject) => {
             this.fireStore.collection('posts').add({
                 post
@@ -59,7 +40,9 @@ export class FirestoreService {
                 reject(err);
             });
         });
+    }
 
-
+    deletePost(uid: string) {
+        this.fireStore.doc(`posts/${uid}`).delete();
     }
 }
