@@ -6,7 +6,9 @@
     <ion-searchbar [(ngModel)]="search" animated></ion-searchbar>
 </ion-header>
 
-<ion-content padding-top>
+<ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+
+<ion-content padding-top *ngIf="!isLoading">
 
     <ion-card *ngFor="let post of posts | postfilter: search" margin-bottom>
         <ion-badge slot="start" color="warning">{{"Davetler: " + post.post.invitations.length}}</ion-badge>

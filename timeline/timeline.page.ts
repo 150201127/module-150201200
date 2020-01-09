@@ -15,6 +15,7 @@ export class TimelinePage implements OnInit {
     uid: string;
     posts: any[];
     search: PostfilterPipe;
+    isLoading = false;
 
     constructor(private firebaseService: FirestoreService,
                 private navCtrl: NavController,
@@ -37,9 +38,13 @@ export class TimelinePage implements OnInit {
     }
 
     getPosts(uid: string) {
+
+        this.isLoading = true;
+
         this.firebaseService.getPosts(uid, posts => {
             this.posts = posts;
             console.log(posts);
+            this.isLoading = false;
         });
     }
 
